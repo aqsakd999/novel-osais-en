@@ -642,7 +642,7 @@ const Section: React.FC<{ type?: string }> = (props: { type?: string }) => {
                       style={{
                         borderRadius: '8px',
                         width: '100%',
-                        maxHeight: 250,
+                        maxHeight: 200,
                         objectFit: 'cover',
                         marginBottom: '0.5rem',
                       }}
