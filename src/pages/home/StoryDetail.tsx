@@ -262,6 +262,7 @@ const StoryDetail: React.FC = () => {
       </CenteredBox>
     )
   }
+  const decryptedParagraphText = decryptAES(story.description)
 
   const navigation = (
     <div
@@ -442,7 +443,7 @@ const StoryDetail: React.FC = () => {
           <Description>
             {/* {story.description} */}
             <StyledCardContent>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{story.description}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{decryptedParagraphText}</ReactMarkdown>
             </StyledCardContent>
           </Description>
           {navigation}
