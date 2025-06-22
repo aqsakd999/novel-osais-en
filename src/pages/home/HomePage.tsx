@@ -75,26 +75,125 @@ const LANGUAGE_CONFIGS = {
     menu: [
       { name: 'Home' },
       { name: 'Just Updated', tooltip: 'Stories just been updated', value: 'new' },
-      { name: 'Youtube', tooltip: 'Stories with youtube audio', value: 'youtube' },
+      // { name: 'Youtube', tooltip: 'Stories with youtube audio', value: 'youtube' },
       { name: '🏷️ Tags', value: 'tags' },
     ],
     tags: [
-      { label: 'tag1', value: 'tag1' },
-      { label: 'tag2', value: 'tag2' },
-      { label: 'tag3', value: 'tag3' },
-      { label: 'tag4', value: 'tag4' },
-      { label: 'tag5', value: 'tag5' },
-      { label: 'tag6', value: 'tag6' },
-      { label: 'tag7', value: 'tag7' },
-      { label: 'tag8', value: 'tag8' },
-      { label: 'tag9', value: 'tag9' },
-      { label: 'tag10', value: 'tag10' },
-      { label: 'tag11', value: 'tag11' },
-      { label: 'tag12', value: 'tag12' },
-      { label: 'tag13', value: 'tag13' },
-      { label: 'tag14', value: 'tag14' },
-      { label: 'tag15', value: 'tag15' },
-    ],
+      'DOCTOR',
+      'VENGEANCE',
+      'SUPPORTIVE COMMENT',
+      'BEST FRIEND',
+      'PRIMA DONNA ATTITUDE',
+      'WAR',
+      'SISTER-IN-LAW DYNAMICS',
+      'EMOTIONAL HEALING',
+      'ROYAL COURT NOBILITY',
+      'PALACE SCHEMING',
+      'WORKPLACE',
+      'CONTEMPORARY',
+      'HISTORICAL DRAMA',
+      'ANCIENT MYSTICISM',
+      'ANCIENT ERA',
+      'FOLKLORE',
+      'FAMILY',
+      'FAMILY RIVALRY',
+      'ENTERTAINMENT',
+      "MALE PROTAGONIST'S VIEW",
+      'SHATTERED RELATIONSHIP',
+      'IRREPARABLE BREAK',
+      'MENDED RELATIONSHIP',
+      'HAPPY ENDING',
+      'MISUNDERSTANDING',
+      'MODERN',
+      'MODERN CONTEMPORARY',
+      'FANTASY',
+      'MYSTERY',
+      'COMEDY',
+      'HUMOR',
+      'LIGHTHEARTED ROMANCE',
+      'ELITE FAMILY',
+      'CRIME',
+      'MARRIAGE',
+      'FICTION',
+      'FANTASY FICTION',
+      'SYSTEM-BASED',
+      'SCHOOL SETTING',
+      'THRILLER',
+      'NO ROMANTIC PAIRING',
+      'TOP RECOMMENDATION',
+      'HORROR',
+      'MEMOIR',
+      'IRITUAL MYSTICISM',
+      'HUMAN NATURE',
+      'CONFLICT',
+      'POST-APOCALYPSE',
+      'MOTHER-IN-LAW CONFLICT',
+      'CULINARY',
+      "HEART'S VOICE",
+      'INFIDELITY',
+      'ROMANCE',
+      'ANGST',
+      'SWEET ROMANCE',
+      'DOTING ROMANCE',
+      'AWAKENED CHARACTER',
+      'PERIOD SETTING',
+      'RURAL LIFE',
+      'STRONG FEMALE LEAD',
+      'MODERN STRONG FEMALE',
+      'CASE-SOLVING',
+      'POLITICAL INTRIGUE',
+      'STRANGE TALE RULES',
+      'POWER PLOTTING',
+      'RETRIBUTION',
+      'SAD ENDING',
+      'ENTERTAINMENT INDUSTRY',
+      'UNGRATEFUL TRAITOR',
+      'IMBA',
+      'REINCARNATED',
+      'PAMPERING LOVE',
+      'CHILDHOOD LOVERS',
+      'YOUTHFUL CAMPUS',
+      'CHASING DREAMS',
+      'TRUE VS FAKE HEIRESS',
+      'VILLAGE LIFE',
+      'PETS',
+      'AUTHENTIC VS FAKE',
+      'IMMORTAL ADVENTURE',
+      'EMOTIONAL DRAMA',
+      'BATTLE FOR DOMINION',
+      'RIVALRY',
+      'DETECTIVE MYSTERY',
+      'COURT INTRIGUE',
+      'WINNING BACK LOVE',
+      'SHORT STORY',
+      'ORAL STORYTELLING',
+      'REBIRTH',
+      'SCHOOL-LIFE',
+      'COMING OF AGE',
+      'REVENGE',
+      'PATRIARCHAL BIAS',
+      'REBIRTH',
+      'SPIRITUAL CULTIVATION',
+      'IMMORTAL CULTIVATION',
+      'DOCUMENTARY',
+      'REINCARNATION',
+      'PSYCHOLOGICAL',
+      'END TIMES',
+      'DOMINANT CEO',
+      'CRIME',
+      'EXPOSE AND HUMILIATE',
+      'EXPOSE FAKE INNOCENCE',
+      'FAST WORLD-HOPPING',
+      'BOOK WORLD TRAVEL',
+      'MEDICAL',
+      'UNREQUITED LOVE',
+      'RURAL LIVING',
+      'MIND READING',
+      'URBAN LIFE',
+      'DAILY LIFE',
+      'FAMILY DYNAMICS',
+      'FOOD AND CUISINE',
+    ].map((item) => ({ value: item, label: item })),
     footer: '© 2025 HorrorVerse. All rights reserved.',
     expandTagSearch: '🔽 Expand tags search',
     closeTagSearch: '🔼 Close tags search',
@@ -650,11 +749,14 @@ const Sidebar = () => {
   const fetchMostViewed = async (range: 'day' | 'week' | 'month' | 'all') => {
     const fromDate = getViewedTimeRange(range) || new Date(0).toISOString()
 
-    const { data, error } = await supabase.rpc('get_most_viewed_stories', {
-      from_date: fromDate,
-      limit_count: 5,
-      type: null,
-    })
+    // const { data, error } = await supabase.rpc('get_most_viewed_stories', {
+    //   from_date: fromDate,
+    //   limit_count: 5,
+    //   type: null,
+    // })
+
+    const query = supabase.from('stories').select('*').order('views', { ascending: false }).limit(5)
+    const { data, error } = await query
 
     if (error) console.error('Error fetchMostViewed:', error)
     else setMostViewedData(data || [])
@@ -708,7 +810,6 @@ const Sidebar = () => {
               - {post.title}
             </div>
             <p style={{ color: '#999' }}>{post.description.substring(0, 100) + '...'}</p>
-            <span style={{ color: '#999' }}>by {post.author}</span>
           </div>
         ))}
       </div>
@@ -869,10 +970,14 @@ export const Header = () => {
           onClose={handleClose}
           sx={{ mt: 1 }}
         >
-          <Box sx={{ px: 2, py: 1, width: '600px' }}>
-            <Grid container spacing={1} sx={{ width: '100%' }}>
+          <Box sx={{ px: 2, py: 1, width: '900px' }}>
+            <Grid
+              container
+              spacing={1}
+              sx={{ width: '100%', overflowX: 'auto', overflowY: 'auto' }}
+            >
               {TAGS.map((tag, index) => (
-                <Grid item xs={2} key={index}>
+                <Grid item xs={3} key={index}>
                   <Typography
                     onClick={() => handleTagClick(tag)}
                     onMouseOver={(e) => {
@@ -887,7 +992,7 @@ export const Header = () => {
                       // @ts-ignore
                       e.target.style.textDecoration = 'none'
                     }}
-                    sx={{ cursor: 'pointer' }}
+                    sx={{ cursor: 'pointer', fontSize: '14px' }}
                   >
                     {tag.label}
                   </Typography>
@@ -996,7 +1101,7 @@ export default function Home() {
 
     const fetchNewPosts = async () => {
       const itemsPerPage = 8
-      const startPage = 1
+      const startPage = 2
       const endPage = 20
       const randomPage = Math.floor(Math.random() * (endPage - startPage + 1)) + startPage
       const from = (randomPage - 1) * itemsPerPage
