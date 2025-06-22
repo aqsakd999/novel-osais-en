@@ -1,0 +1,143 @@
+{
+  "name": "react-typescript",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
+    "@fortawesome/free-regular-svg-icons": "^6.7.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@fullcalendar/core": "^6.1.9",
+    "@fullcalendar/daygrid": "^6.1.9",
+    "@fullcalendar/interaction": "^6.1.9",
+    "@fullcalendar/list": "^6.1.9",
+    "@fullcalendar/react": "^6.1.9",
+    "@fullcalendar/timegrid": "^6.1.9",
+    "@hookform/resolvers": "^3.3.1",
+    "@mui/icons-material": "^5.14.12",
+    "@mui/material": "^5.14.12",
+    "@mui/x-data-grid": "^6.18.6",
+    "@mui/x-date-pickers": "^6.16.0",
+    "@reduxjs/toolkit": "^1.9.6",
+    "@supabase/supabase-js": "^2.49.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^29.2.5",
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/yup": "^0.32.0",
+    "antd": "^5.14.2",
+    "axios": "^1.8.4",
+    "craco": "^0.0.3",
+    "crypto-js": "^4.2.0",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "html-react-parser": "^5.1.10",
+    "i18next": "^22.4.8",
+    "markdown-it": "^14.1.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "moment": "^2.29.4",
+    "notistack": "^3.0.1",
+    "react": "18.0.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-color": "^2.19.3",
+    "react-datepicker": "^4.18.0",
+    "react-dom": "18.0.0",
+    "react-file-viewer": "^1.2.1",
+    "react-grid-layout": "^1.0.0",
+    "react-hook-form": "^7.47.0",
+    "react-i18next": "^12.1.1",
+    "react-icons": "^4.12.0",
+    "react-markdown": "^10.1.0",
+    "react-number-format": "^5.3.1",
+    "react-quill": "^2.0.0",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.6.1",
+    "react-scripts": "5.0.1",
+    "react-text-mask": "^5.5.0",
+    "react-use": "^17.5.0",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "styled-components": "^6.0.8",
+    "suneditor": "^2.45.1",
+    "suneditor-react": "^3.6.1",
+    "tippy.js": "^6.3.7",
+    "typescript": "^4.4.2",
+    "uuidv4": "^6.2.13",
+    "web-vitals": "^2.1.0",
+    "yup": "^1.3.3"
+  },
+  "scripts": {
+    "start": "env-cmd craco start",
+    "build": "env-cmd craco build",
+    "test": "env-cmd craco test --watchAll=false",
+    "test:coverage": "env-cmd craco test --coverage",
+    "test:ci": "react-scripts test --watchAll=false --passWithNoTests --ci --coverage",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext js,jsx,ts,tsx --max-warnings=0 src/",
+    "lint:build": "eslint --ext js,jsx,ts,tsx src/",
+    "format": "prettier --write --no-error-on-unmatched-pattern 'src/**/*.ts'",
+    "postinstall": "husky install"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/react-beautiful-dnd": "^13.1.8",
+    "@types/react-color": "^3.0.10",
+    "@types/react-datepicker": "^4.15.1",
+    "@types/react-grid-layout": "^1.0.0",
+    "@types/react-select": "^3.0.13",
+    "@types/webpack-env": "^1.18.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
+    "craco-alias": "^3.0.1",
+    "env-cmd": "^10.1.0",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-testing-library": "^5.9.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.3",
+    "sass": "^1.57.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,css}": [
+      "yarn lint",
+      "yarn format"
+    ]
+  }
+}

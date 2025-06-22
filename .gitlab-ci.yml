@@ -1,0 +1,38 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  SOURCE_PATH: "/home/gitlab-runner/react-typescript"
+
+# Build
+build image:
+  stage: build
+  before_script:
+    - docker info
+    - docker-compose version
+    - cd $SOURCE_PATH
+    - git checkout develop
+    - git pull
+  after_script:
+    - docker image prune -f
+  script:
+    - docker-compose build
+  only:
+    - develop
+  tags:
+    - mansion-fe-runner
+
+# Deploy
+deploy:
+  stage: deploy
+  script:
+    - cd $SOURCE_PATH
+    - docker-compose down
+    - docker-compose up -d
+  when: on_success
+  only:
+    - develop
+  tags:
+    - mansion-fe-runner

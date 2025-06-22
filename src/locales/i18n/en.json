@@ -1,0 +1,13 @@
+{
+  "about": "About",
+  "about.text": "This is where you showcase your history, what is unique about your work, your company's values, and who you serve.",
+  "home": "Home",
+  "hello": "Hello",
+  "login": "Login",
+  "logout": "Logout",
+  "error.403": "403 - Forbidden content",
+  "error.404": "404 - Content is not found",
+  "product.id": "ID",
+  "product.title": "Title",
+  "product.description": "Description"
+}

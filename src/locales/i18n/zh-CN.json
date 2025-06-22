@@ -1,0 +1,13 @@
+{
+  "about": "关于",
+  "about.text": "在这里您可以展示您的历史、您的工作的独特之处、您公司的价值观以及您的服务对象。",
+  "home": "家",
+  "hello": "你好",
+  "login": "登录",
+  "logout": "登出",
+  "error.403": "403 - 禁止内容",
+  "error.404": "404 - 未找到此页面。",
+  "product.id": "ID",
+  "product.title": "标题",
+  "product.description": "描述"
+}

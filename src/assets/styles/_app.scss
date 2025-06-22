@@ -1,0 +1,54 @@
+/**
+ * Define style sheets for this application
+ */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif  !important;
+}
+
+.Mui-disabled {
+  cursor: not-allowed !important;
+}
+
+.page-content {
+  padding: 1rem;
+}
+
+.ant-image-preview-operations-wrapper, .ant-image-preview-wrap {
+  z-index: 10000 !important;
+}
+
+.ant-image-preview-mask {
+  z-index: 1399 !important;
+} 
+
+.tippy-box {
+  background-color: rgba(97, 97, 97, 0.9);
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 6px; 
+  height: 6px; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 6px; 
+}
+
+/* Thanh cuộn khi hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Thanh cuộn track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-popover {
+  z-index: 1999;
+}
