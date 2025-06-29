@@ -7,6 +7,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  useMediaQuery,
 } from '@mui/material'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -24,6 +25,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { InfoOutlined } from '@mui/icons-material'
 import CryptoJS from 'crypto-js'
+import AdsterraDemo from './use-hook/Banner'
 
 const Wrapper = styled(Box)`
   max-width: 800px;
@@ -118,6 +120,7 @@ const StoryDetail: React.FC = () => {
   const [hasUpvoted, setHasUpvoted] = useState(false)
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const isMobile = useMediaQuery('(max-width: 720px)')
 
   const fullText = story
     ? `Story ${story.title} begin:\n${story.description}`.replaceAll('.', '. ')
@@ -283,7 +286,10 @@ const StoryDetail: React.FC = () => {
       >
         <Button
           variant='contained'
-          onClick={() => navigate(`/novel/${slug}/${chapterIndex - 1}`)}
+          onClick={() => {
+            navigate(`/novel/${slug}/${chapterIndex - 1}`)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
           disabled={chapterIndex <= 1}
         >
           ← Prev
@@ -301,7 +307,10 @@ const StoryDetail: React.FC = () => {
           <Select
             size='small'
             value={chapterIndex}
-            onChange={(e) => navigate(`/novel/${slug}/${e.target.value}`)}
+            onChange={(e) => {
+              navigate(`/novel/${slug}/${e.target.value}`)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
           >
             {allChapterIndexes.map((index) => (
               <MenuItem key={index} value={index}>
@@ -312,7 +321,10 @@ const StoryDetail: React.FC = () => {
         </FormControl>
         <Button
           variant='contained'
-          onClick={() => navigate(`/novel/${slug}/${chapterIndex + 1}`)}
+          onClick={() => {
+            navigate(`/novel/${slug}/${chapterIndex + 1}`)
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
           disabled={chapterIndex >= totalChapter}
         >
           Next →
@@ -328,6 +340,8 @@ const StoryDetail: React.FC = () => {
       <Wrapper>
         <div style={{ padding: '100px 20px 20px 20px', paddingTop: '80px' }}>
           <Box marginTop='24px'>{navigation}</Box>
+          <AdsterraDemo showTop={isMobile} />
+
           <br />
           <Title>{story.title}</Title>
           <Meta>
