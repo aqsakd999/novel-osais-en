@@ -31,6 +31,7 @@ import { supabase } from '@app/config/supabaseClient'
 import { useLocation } from 'react-router-dom'
 import { ClearIcon } from '@mui/x-date-pickers/icons'
 import { Search } from '@mui/icons-material'
+import RealAdsterraPage from './Banner'
 
 const GridStyled = styled(Grid)`
   padding: 60px;
@@ -396,7 +397,7 @@ const Section: React.FC<{ type?: string }> = (props: { type?: string }) => {
   //   }
   // }, [categories, navigate])
 
-  const limit = 12
+  const limit = 8
   const isMobile = useMediaQuery('(max-width: 720px)')
   const compactMode = displayMode === 'compact'
 
@@ -423,9 +424,11 @@ const Section: React.FC<{ type?: string }> = (props: { type?: string }) => {
     }
   }, [isMobile])
 
+  const paramCat = queryParams.get('category')
+
   useEffect(() => {
     fetchStories()
-  }, [search, orderBy, page, queryParams.get('category')])
+  }, [search, orderBy, page, paramCat])
 
   useEffect(() => {
     localStorage.setItem('DISPLAY_SECTION_MODE', displayMode)
@@ -601,11 +604,14 @@ const Section: React.FC<{ type?: string }> = (props: { type?: string }) => {
             <Search /> Search
           </Button>
         </div>
-        {/* Displaying stories in a 5-item grid */}
+        <div>
+          <RealAdsterraPage />
+        </div>
+
         <div
           style={{
-            paddingLeft: isMobile ? '0px' : '100px',
-            paddingRight: isMobile ? '0px' : '100px',
+            paddingLeft: isMobile ? '0px' : '180px',
+            paddingRight: isMobile ? '0px' : '180px',
           }}
         >
           <GridStyled
@@ -639,6 +645,7 @@ const Section: React.FC<{ type?: string }> = (props: { type?: string }) => {
                     <img
                       src={`${story.image}`}
                       alt={story.title}
+                      loading='lazy'
                       style={{
                         borderRadius: '8px',
                         width: '100%',
