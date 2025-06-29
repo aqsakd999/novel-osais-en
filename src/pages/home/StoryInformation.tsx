@@ -4,6 +4,8 @@ import { Footer, FooterContainer, Header, LanguageConfigItem, Story } from './Ho
 import { supabase } from '@app/config/supabaseClient'
 import { Button, Divider, useMediaQuery } from '@mui/material'
 import Loading from '@app/components/common/Loading/Loading'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AdsterraDemo from './Banner'
 
 const getRandomColor = () => {
   const darkColors = ['#B22222', '#8B008B', '#2E8B57', '#00008B', '#8B4513', '#9932CC']
@@ -90,7 +92,7 @@ export default function StoryInformation() {
           top: 0,
           left: 0,
           width: '100%',
-          height: '100%',
+          height: '90%',
           zIndex: -1,
           backgroundImage: `url(${story.image})`,
           backgroundSize: 'cover',
@@ -108,7 +110,7 @@ export default function StoryInformation() {
           paddingLeft: isMobile ? '24px' : '20%',
           paddingRight: isMobile ? '24px' : '20%',
           background: 'rgba(255, 255, 255, 0.8)',
-          height: '100vh',
+          height: '90vh',
         }}
       >
         <div style={{ display: !isMobile ? 'flex' : 'contents', gap: '40px' }}>
@@ -116,6 +118,7 @@ export default function StoryInformation() {
             <img
               src={`${story.image}`}
               alt={story.title}
+              loading='lazy'
               style={{
                 width: '100%',
                 maxHeight: 400,
@@ -137,7 +140,6 @@ export default function StoryInformation() {
             </p>
           </div>
         </div>
-
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '10px 0' }}>
           {(story.category ?? []).map((cat, idx) => {
             const color = getRandomColor()
@@ -156,7 +158,6 @@ export default function StoryInformation() {
             )
           })}
         </div>
-
         <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
           <Button
             variant='contained'
@@ -181,7 +182,32 @@ export default function StoryInformation() {
             {LanguageConfigItem.readingPrevious}
           </Button>
         </div>
-
+        {story?.uploaded_youtube_url && (
+          <Button
+            variant='contained'
+            onClick={handleStartReading}
+            size='large'
+            sx={{
+              fontSize: isMobile ? '16px' : '20px',
+            }}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 576 512'
+              style={{
+                width: '24px',
+                color: 'red',
+                fill: 'red',
+                flexShrink: 0,
+              }}
+            >
+              {' '}
+              <path d='M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z' />
+            </svg>
+            &nbsp; Youtube
+          </Button>
+        )}
+        <AdsterraDemo showTop={false} />
         <h2>{LanguageConfigItem.chapterList}</h2>
         <div
           style={{
