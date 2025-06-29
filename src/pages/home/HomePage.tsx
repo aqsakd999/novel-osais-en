@@ -27,6 +27,7 @@ import { LabelAndValue } from '@app/common/type'
 import SearchIcon from '@mui/icons-material/Search'
 import Loading from '@app/components/common/Loading/Loading'
 import YouTubeIcon from '@mui/icons-material/YouTube'
+import RealAdsterraPage from './Banner'
 
 export type Chapter = {
   id: string
@@ -648,7 +649,6 @@ const LANGUAGE_CONFIGS = {
     clickContinue: 'Haz clic en ▶️ para continuar',
   },
 }
-
 export const DATA_SOURCE = process.env.REACT_APP_DATA_SOURCE || 'reddit'
 
 // @ts-ignore
@@ -726,6 +726,10 @@ const SectionList = styled.div`
   scrollbar-width: thin;
   height: 500px;
   padding: 25px;
+  @media (max-width: 768px) {
+    height: 400px;
+  }
+
   /* Force scrollbar to show on WebKit browsers */
   &::-webkit-scrollbar {
     height: 8px;
@@ -1021,23 +1025,54 @@ const MUI_Carousel = ({ dataList }: { dataList: Story[] }) => {
     <AntdCarouselStyled autoplay pauseOnDotsHover dotPosition='bottom' pauseOnFocus pauseOnHover>
       {dataList.map((item) => (
         <div key={item.id} style={{ position: 'relative', height: '600px', width: '100%' }}>
-          <img
-            src={
-              item.uploaded_youtube_url
-                ? `https://img.youtube.com/vi/${item.uploaded_youtube_url}/maxresdefault.jpg`
-                : item.image
-            }
-            alt={item.title.substring(0, 10) + '...'}
-            style={{
-              objectFit: 'cover',
-            }}
-            onError={(e) => {
-              // @ts-ignore
-              e.target.onerror = null // tránh lặp vô hạn nếu fallback cũng lỗi
-              // @ts-ignore
-              e.target.src = item.image
-            }}
-          />
+          {isMobile ? (
+            <img
+              src={item.image}
+              alt={item.title.substring(0, 10) + '...'}
+              loading='lazy'
+              style={{
+                objectFit: 'cover',
+              }}
+              onError={(e) => {
+                // @ts-ignore
+                e.target.onerror = null // tránh lặp vô hạn nếu fallback cũng lỗi
+                // @ts-ignore
+                e.target.src = item.image
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                position: 'relative',
+                width: '100vw',
+                aspectRatio: '16 / 9',
+                maxHeight: '600px',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={
+                  item.uploaded_youtube_url
+                    ? `https://img.youtube.com/vi/${item.uploaded_youtube_url}/maxresdefault.jpg`
+                    : item.image
+                }
+                alt={item.title.substring(0, 10) + '...'}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                loading='lazy'
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = item.image
+                }}
+              />
+            </div>
+          )}
           <div
             style={{
               position: 'absolute',
@@ -1045,6 +1080,7 @@ const MUI_Carousel = ({ dataList }: { dataList: Story[] }) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
+              paddingLeft: isMobile ? '0px' : '160px',
             }}
           >
             <div
@@ -1057,6 +1093,7 @@ const MUI_Carousel = ({ dataList }: { dataList: Story[] }) => {
                 marginLeft: '20px',
                 borderRadius: '8px',
                 maxWidth: '80%',
+                paddingLeft: '20px',
               }}
             >
               <h2 className='car-item-title' style={{ marginBottom: '0.5rem' }}>
@@ -1109,7 +1146,12 @@ const MUI_Carousel = ({ dataList }: { dataList: Story[] }) => {
                   ) : (
                     <MobileViewMoreText
                       variant='contained'
-                      onClick={() => console.log('go to youtube')}
+                      onClick={() =>
+                        window.open(
+                          `https://www.youtube.com/watch?v=${item.uploaded_youtube_url}`,
+                          '_blank',
+                        )
+                      }
                     >
                       <div
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -1578,6 +1620,9 @@ export default function Home() {
         <Header />
 
         <MUI_Carousel dataList={carouselData} />
+        <div>
+          <RealAdsterraPage />
+        </div>
 
         <MainContent>
           <div className='main-item'>
