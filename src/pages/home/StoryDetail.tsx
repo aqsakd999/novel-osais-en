@@ -25,7 +25,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { InfoOutlined } from '@mui/icons-material'
 import CryptoJS from 'crypto-js'
-import AdsterraDemo from './use-hook/Banner'
+import AdsterraDemo from './Banner'
 
 const Wrapper = styled(Box)`
   max-width: 800px;
